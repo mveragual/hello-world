@@ -1,0 +1,33 @@
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+        					http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    
+    <!-- se configura un servlet para usar CXF JAX-RS sin spring -->
+    <servlet>
+		<servlet-name>servletREST</servlet-name>
+		<servlet-class>org.apache.cxf.jaxrs.servlet.CXFNonSpringJaxrsServlet</servlet-class>
+		<init-param>
+			<param-name>jaxrs.serviceClasses</param-name>
+			<param-value>com.sonda.rest.GreetingResourceImpl</param-value>
+		</init-param>
+		<init-param>
+			<param-name>jaxrs.address</param-name>
+			<param-value>/rest</param-value>
+		</init-param>
+		<init-param>
+	        <param-name>jaxrs.providers</param-name>
+	        <param-value>org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider</param-value> 
+	    </init-param>
+	    <init-param>
+		  <param-name>jaxrs.extensions</param-name>
+		  <param-value>json=application/json</param-value>
+		</init-param>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>servletREST</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+	
+</web-app>
